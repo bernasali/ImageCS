@@ -1,2 +1,4 @@
-package com.imgclassificator;public class GreetingController {
+package com.imgclassificator;
+
+public class GreetingController {
 }
