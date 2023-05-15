@@ -31,3 +31,9 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Run backend unit tests
         run: mvn test
+    - name: Run static code analysis
+        uses: reviewdog/action-checkstyle@v1
+        with:
+          tool_name: checkstyle
+          reporter: github-pr-review
+          github_token: ${{ secrets.GITHUB_TOKEN }}
