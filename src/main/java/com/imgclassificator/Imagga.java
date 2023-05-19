@@ -1,6 +1,9 @@
 package com.imgclassificator;
 
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -9,8 +12,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.net.URLEncoder;
 
+//@RestController
 public class Imagga {
-    public static void main(String[] args) {
+    //@GetMapping("/images")
+
+    public static String main(String[] args) {
         try {
             String credentialsToEncode = "acc_36c475c133aa761" + ":" + "e774e4e796859b130206d49b238a2b34";
             String basicAuth = Base64.getEncoder().encodeToString(credentialsToEncode.getBytes(StandardCharsets.UTF_8));
@@ -39,10 +45,12 @@ public class Imagga {
 
             connectionInput.close();
 
-            System.out.println(jsonResponse.toString());
+            //System.out.println(jsonResponse.toString());
+            return new String(jsonResponse);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 

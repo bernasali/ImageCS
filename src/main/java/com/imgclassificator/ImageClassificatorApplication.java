@@ -1,8 +1,14 @@
 package com.imgclassificator;
 
+import com.imgclassificator.entity.ImageEntity;
+import com.imgclassificator.entity.ImageTagEntity;
+//import com.imgclassificator.repository.ImageRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
+
 
 @SpringBootApplication
 @EntityScan
@@ -23,5 +29,18 @@ public class ImageClassificatorApplication {
 //		e.printStackTrace();
 //	}
         SpringApplication.run(ImageClassificatorApplication.class, args);
+
 }
+
+//@Bean
+//public CommandLineRunner run(ImageRepository repository){
+//	    return (args -> {
+//	        insertJavaAdvocates(repository);
+//	        System.out.println(repository.findAll());
+//        });
+//}
+
+//private void insertJavaAdvocates(ImageRepository repository){
+//	    repository.save(new ImageTagEntity(12,1,1));
+//}
 }

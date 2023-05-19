@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 import java.util.List;
 
-
+@Entity
 @Table(name="image")
 public class ImageEntity {
    @Id
@@ -85,3 +85,5 @@ public class ImageEntity {
         this.height = height;
     }
 }
+
+

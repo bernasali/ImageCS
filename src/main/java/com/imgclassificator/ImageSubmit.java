@@ -29,13 +29,13 @@ public class ImageSubmit {
     }
 
     @GetMapping("/images")
-    public Map<String, Object> categorizeImage(@RequestParam String imageUrl) {
+    public Map<String, Object> categorizeImage(@RequestParam(required=false) String imageUrl) {
         Map<String, Object> response = new HashMap<>();
 
         try {
             // Prepare the request URL
            // @Value("${server.endpoint}")
-            String url = IMAGGA_TAGS_ENDPOINT + "https://en.wikipedia.org/wiki/Western_honey_bee#/media/File:Apis_mellifera_Western_honey_bee.jpg" + imageUrl;
+            String url = IMAGGA_TAGS_ENDPOINT  + "?image_url=" +"https://imagga.com/static/images/tagging/wind-farm-538576_640.jpg" ;
 
             // Set the Imagga authentication credentials
             String credentialsToEncode = IMAGGA_API_KEY + ":" + IMAGGA_API_SECRET;
