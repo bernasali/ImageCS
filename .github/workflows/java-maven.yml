@@ -28,6 +28,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build without Tests
-      run: mvn -B package --file ics/pom.xml -DskipTests
+      run: mvn -B package --file ImageCS/pom.xml -DskipTests
     - name: Build with Tests
-      run: mvn -B package --file ics/pom.xml
+      run: mvn -B package --file ImageCS/pom.xml
