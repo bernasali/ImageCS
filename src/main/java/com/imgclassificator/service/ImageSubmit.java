@@ -1,15 +1,21 @@
+
 package com.imgclassificator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.*;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.*;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,9 +30,17 @@ public class ImageSubmit {
     private static final String IMAGGA_API_SECRET = "e774e4e796859b130206d49b238a2b34";
     private static final String IMAGGA_TAGS_ENDPOINT = "https://api.imagga.com/v2/tags";
 
+   private static final String DB_URL="jdbc:postgresql://localhost:5432/ics ";
+    private static final String DB_USERNAME ="postgres";
+    private static final String DB_PASSWORD="Anreb";
+    private static final String url="https://imagga.com/static/images/tagging/wind-farm-538576_640.jpg";
+
     public static void main(String[] args) {
         SpringApplication.run(ImageSubmit .class, args);
     }
+
+    //@Autowired
+    public JdbcTemplate jdbcTemplate;
 
     @GetMapping("/images")
     public Map<String, Object> categorizeImage(@RequestParam(required=false) String imageUrl) {
@@ -52,6 +66,26 @@ public class ImageSubmit {
             if (imaggaResponse.getStatusCode() == HttpStatus.OK) {
                 response.put("success", true);
                 response.put("tags", imaggaResponse.getBody());
+//               //Card card = cardRepository.save(new Card(createCardResource.getCardType(), cardOwner.get()));
+////                String json = imaggaResponse.getBody();
+////
+////                // Save the result to the database
+////               Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+////
+////                String insertQuery = "INSERT INTO image (url,timestamp, json, width, height) VALUES (?,CURRENT_TIMESTAMP, ?, ?, ?)";
+////                PreparedStatement statement = connection.prepareStatement(insertQuery);
+////                statement.setString(1, json);
+////                statement.setInt(2, 640);
+////                statement.setInt(3, 480);
+////                statement.executeUpdate();
+////
+////                // Close the database resources
+////                statement.close();
+////                connection.close();
+//neww ??
+//                String json = imaggaResponse.getBody();
+//                String insertQuery = "INSERT INTO image VALUES (?,new Timestamp(System.currentTimeMillis()),?::JSON,640,480)";
+//                jdbcTemplate.update(insertQuery, json);
             } else {
                 response.put("success", false);
                 response.put("error", "Image categorization failed");
@@ -63,4 +97,18 @@ public class ImageSubmit {
 
         return response;
     }
+
+//    private Long saveImageToDatabase(String imageUrl) {
+//        KeyHolder keyHolder = new GeneratedKeyHolder();
+//        jdbcTemplate.update(con -> {
+//            PreparedStatement ps = con.prepareStatement("INSERT INTO image (url, analysedAt) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+//            ps.setString(1, imageUrl);
+//            ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+//            return ps;
+//        }, keyHolder);
+//
+//        return keyHolder.getKey().longValue();
+//    }
+
 }
+
