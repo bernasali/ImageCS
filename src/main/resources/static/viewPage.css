@@ -43,33 +43,34 @@ button {
     font-size: 17px;
 }
 
-#title {
-    display: flex;
-    justify-content: center;
-    text-shadow: #272727;
+img {
+    width: 200px;
+    height: 200px;
 }
 
-#analyse-btn {
+#wrapper {
+    display: flex;
+}
+
+h2 {
     display: flex;
     justify-content: center;
 }
 
-#url-input {
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
+.tag {
+    background-color: rgb(205, 200, 200);
+    backdrop-filter: blur(5px);
+    padding: 5px;
+    border: 1px solid gray;
+    margin: 3px;
 }
 
-#url {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 20px;
-    /* justify-content: space-between; */
+#analyse-date {
+    color: rgb(53, 52, 52);
 }
 
-input {
-    width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
+.image a:hover {
+    background-color: #ddd;
+    color: black;
+    contain-intrinsic-height: 150px;
 }

@@ -5,36 +5,61 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="image")
 public class ImageEntity {
-   @Id
+
+    @Id
+   @SequenceGenerator(
+           name = "image_seq",
+           sequenceName = "image_seq",
+           allocationSize = 1
+   )
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name="image_id")
     private int id;
     @Column(name="url")
     private String url;
+
+
     @Column(name="analysed_at")
-    private String analysed_at;
-    @Column(name="tags")
-    private List<Tags> tags;
+    private LocalDate analysed_at;
+    //@OneToMany
+//    @Column(name="tags")
+//    private String tags;
     @Column(name="width")
     private double width;
     @Column(name="height")
     private double height;
 
+
+    @JoinTable(name = "image_label",
+            joinColumns = {
+                    @JoinColumn(name = "id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "label_id", referencedColumnName = "label_id")
+
+            }
+    )
+    private List<LabelEntity> labels;
+
     public ImageEntity() {
     }
 
-    public ImageEntity(int id, String url, String analysed_at, List<Tags> tags, double width, double height) {
+    public ImageEntity(int id, String url, LocalDate analysed_at, String tags, double width, double height) {
         this.id = id;
         this.url = url;
         this.analysed_at = analysed_at;
-        this.tags = tags;
+        //this.tags = tags;
         this.width = width;
         this.height = height;
+        this.labels=new ArrayList<>(labels);
     }
 
     public int getId() {
@@ -53,22 +78,22 @@ public class ImageEntity {
         this.url = url;
     }
 
-    public String getAnalysed_at() {
+    public LocalDate getAnalysed_at() {
         return analysed_at;
     }
 
-    public void setAnalysed_at(String analysed_at) {
+    public void setAnalysed_at(LocalDate analysed_at) {
         this.analysed_at = analysed_at;
     }
 
-    public List<Tags> getTags() {
+    /*public String getTags() {
         return tags;
-    }
+    }*/
 
-    public void setTags(List<Tags> tags) {
+    /*public void setTags(String tags) {
         this.tags = tags;
     }
-
+*/
     public double getWidth() {
         return width;
     }
@@ -83,6 +108,14 @@ public class ImageEntity {
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    public List<LabelEntity> getLabels() {
+        return new ArrayList<>(labels);
+    }
+
+    public void setLabels(List<LabelEntity> labels) {
+        this.labels = new ArrayList<>(labels);
     }
 }
 

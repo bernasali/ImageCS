@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1, initial-scale=1.0">
 
     <title>Title</title>
-    <link rel="stylesheet" href="D:/Downloads/ics/src/main/resources/static/homePage.css">
+    <link rel="stylesheet" href="homePage.css">
+    <script src="gallery.js" defer></script>
 </head>
+
 <body>
 <nav>
     <div class="top-nav">
-
-
         <div class="topnav-centered">
-            <a href="" class="active">Analyse</a>
-            <a href="" class="active">Galery</a>
-
+            <a href="" class="analyse">Analyse</a>
+            <a href="" class="gallery">Gallery</a>
         </div>
     </div>
 </nav>
 
+<h2>
+    <p id="title">Egami</p>
+</h2>
+<div id="url-input">
+    <input type="url" id="url" placeholder="Enter your image url" required>
+
+</div>
+
+<div id="analyse-btn">
+    <button type="submit">Analyse</button>
+</div>
 </body>
+
 </html>
